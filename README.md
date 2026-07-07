@@ -70,3 +70,7 @@ This installs the `evolution-cache-mcp` command, which speaks MCP over stdio.
   }
 }
 ```
+
+***
+
+This software is copyrighted © 2026 by Carsten Allefeld and released under the terms of the GNU General Public License, version 3 or later.
