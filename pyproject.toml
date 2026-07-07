@@ -1,0 +1,19 @@
+[project]
+name = "evolution-cache-mcp"
+version = "0.1.0"
+description = "MCP server exposing a local Evolution mail cache (SQLite metadata + Maildir bodies) as tools for an LLM agent. One server instance per account."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.2.0",
+]
+
+[project.scripts]
+evolution-cache-mcp = "evolution_cache_mcp.server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/evolution_cache_mcp"]
