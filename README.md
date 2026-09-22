@@ -12,7 +12,7 @@ environment variables — run one instance per account.
 | Env var             | Description                                                                 |
 |----------------------|------------------------------------------------------------------------------|
 | `EVO_MAIL_PATH`      | Full path to the account's cache dir (contains `folders.db` and `folders/`) |
-| `EVO_MAIL_UID_TYPE`  | `ews` (body filename is `sha256(uid)`) or `imap` (filename is the uid itself) |
+| `EVO_MAIL_UID_TYPE`  | `ews` (body filename is `sha256(uid)`), `imap` (filename is the uid itself), or `graph` (filename is `md5(uid)`, for Microsoft365/Graph-backed accounts) |
 | `EVO_MAIL_INFO`      | Free-text account identity, e.g. `"City St George's, you@example.ac.uk"` — used only in the server's agent-facing instructions |
 
 Account cache directories live under `~/.cache/evolution/mail/<account-id>/`.

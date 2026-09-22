@@ -8,8 +8,10 @@ environment variables:
 
   EVO_MAIL_PATH      Full path to the account's cache directory
                       (contains folders.db and a folders/ tree).
-  EVO_MAIL_UID_TYPE   "ews"  — body filename is sha256(uid)
-                      "imap" — body filename IS the uid string
+  EVO_MAIL_UID_TYPE   "ews"   — body filename is sha256(uid)
+                      "imap"  — body filename IS the uid string
+                      "graph" — body filename is md5(uid) (Microsoft365
+                                backend, e.g. Graph-based Exchange accounts)
   EVO_MAIL_INFO       Free-text account identity, e.g. "Work, you@example.com"
                       — used only to fill in the server's agent-facing
                       instructions, not in any query or lookup.
@@ -35,8 +37,8 @@ def _load_config():
     info = os.environ.get("EVO_MAIL_INFO")
     if not path:
         raise RuntimeError("EVO_MAIL_PATH environment variable is required")
-    if uid_type not in ("ews", "imap"):
-        raise RuntimeError('EVO_MAIL_UID_TYPE must be "ews" or "imap"')
+    if uid_type not in ("ews", "imap", "graph"):
+        raise RuntimeError('EVO_MAIL_UID_TYPE must be "ews", "imap", or "graph"')
     if not info:
         raise RuntimeError("EVO_MAIL_INFO environment variable is required")
     if not os.path.isdir(path):
@@ -65,8 +67,12 @@ def _build_index(c: str) -> dict[str, str]:
     return _cur_index[c]
 
 def _find_body_file(folder: str, uid) -> str | None:
-    target = (hashlib.sha256(str(uid).encode()).hexdigest()
-              if UID_TYPE == "ews" else str(uid))
+    if UID_TYPE == "ews":
+        target = hashlib.sha256(str(uid).encode()).hexdigest()
+    elif UID_TYPE == "graph":
+        target = hashlib.md5(str(uid).encode()).hexdigest()
+    else:
+        target = str(uid)
     return _build_index(_cur_dir(folder)).get(target)
 
 # Boilerplate banners Exchange/Outlook injects into message bodies that carry
