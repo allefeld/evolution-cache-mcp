@@ -9,11 +9,11 @@ environment variables — run one instance per account.
 
 ## Configuration
 
-| Env var             | Description                                                                 |
-|----------------------|------------------------------------------------------------------------------|
-| `EVO_MAIL_PATH`      | Full path to the account's cache dir (contains `folders.db` and `folders/`) |
-| `EVO_MAIL_UID_TYPE`  | `ews` (body filename is `sha256(uid)`), `imap` (filename is the uid itself), or `graph` (filename is `md5(uid)`, for Microsoft365/Graph-backed accounts) |
-| `EVO_MAIL_INFO`      | Free-text account identity, e.g. `"City St George's, you@example.ac.uk"` — used only in the server's agent-facing instructions |
+| Env var             | Description                                                                                                                                              |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `EVO_MAIL_PATH`     | Full path to the account's cache dir (contains `folders.db` and `folders/`)                                                                              |
+| `EVO_MAIL_UID_TYPE` | `ews` (body filename is `sha256(uid)`), `imap` (filename is the uid itself), or `graph` (filename is `md5(uid)`, for Microsoft365/Graph-backed accounts) |
+| `EVO_MAIL_INFO`     | Free-text account identity, e.g. `"Organisation, you@example.ac.uk"` — used only in the server's agent-facing instructions                           |
 
 Account cache directories live under `~/.cache/evolution/mail/<account-id>/`.
 
@@ -73,4 +73,4 @@ This installs the `evolution-cache-mcp` command, which speaks MCP over stdio.
 
 ***
 
-This software is copyrighted © 2026 by Carsten Allefeld and released under the terms of the GNU General Public License, version 3 or later.
+This software was developed by Carsten Allefeld using Claude Code as a coding agent. To the extent any copyright subsists in the code, it is released under the terms of the GNU General Public License, version 3 or later.
